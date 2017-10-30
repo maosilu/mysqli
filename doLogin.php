@@ -32,4 +32,9 @@ if($stmt->execute()){
 	}
 }
 
+//释放结果集
+$stmt->free_result();
+//关闭预处理语句
+$stmt->close();
+//关闭连接
 $mysqli->close();
