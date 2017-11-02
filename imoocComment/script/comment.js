@@ -15,7 +15,7 @@ $(document).ready(function(){
 			flag = false;
 			$('#submit').val('发布评论');
 			
-			/*if(msg.status){
+			if(msg.status){
 				$(msg.html).hide().insertBefore('#addCommentContainer').slideDown();
 				$('#content').val('');
 			}
@@ -23,7 +23,7 @@ $(document).ready(function(){
 				$.each(msg.errors,function(k,v){
 					$('label[for='+k+']').append('<span class="error">'+v+'</span>');
 				});
-			}*/
+			}
 		},'json');
 	});
 });

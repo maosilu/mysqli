@@ -18,7 +18,7 @@ class Comment
      * @param array $arr
      * @return boolen
     */
-    public function validate(&$arr){
+    public static function validate(&$arr){
         if(!($data['email'] = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL))){
             $errors['email'] = '请输入合法邮箱';
         }
@@ -61,5 +61,28 @@ class Comment
         }
         $str = nl2br(htmlspecialchars($str, ENT_QUOTES));
         return $str;
+    }
+
+    /**
+     * 显示评论内容
+    */
+    public function output(){
+        $link_start = '';
+        $link_end = '';
+        if($this->_data['url']){
+            $link_start = "<a href='{$this->_data['url']}' target='_blank'>";
+            $link_end = "</a>";
+        }
+        $dateStr = date('Y-m-d H:i:s', $this->_data['pubTime']);
+        $res = <<<EOF
+            <div class='comment'>
+                <div class='face'>{$link_start}<img width='50' height='50' src='img/{$this->_data['face']}.jpg'/>{$link_end}</div>
+                <div class='username'>{$link_start}{$this->_data['username']}{$link_end}</div>
+                <div class='pubtime' title='发布于{$dateStr}'>{$dateStr}</div>
+                <p>{$this->_data['content']}</p>
+            </div>
+EOF;
+                return $res;
+
     }
 }
